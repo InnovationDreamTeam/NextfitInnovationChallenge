@@ -1,0 +1,3 @@
+INSERT INTO member_info(MARITAL_CD,DEPLOYED,ADDRESS,CITY,STATE,COUNTRY) VALUES ("Married","TRUE","1 Norterra DR","PHOENIX","Arizona","United States");
+INSERT INTO product(PRODUCT_NAME) VALUES ("ADT");
+INSERT INTO life_event(EVENT_NAME,PRODUCT_ID) VALUES ("deployment",1);
