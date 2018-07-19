@@ -1,38 +1,112 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
-<title>Customer Discounts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif:700" rel="stylesheet">
+    <title>Customer Discounts</title>
 </head>
+
 <body>
+    <header>
+        <img src="usaaimg.png">
 
-<h1>Member Suggestions</h1>
+    </header>
+    <br><br><br>
+    <h1>Member Suggestions</h1>
+    <br><br><br>
+    <div id="boxes">
+        <form action="/memberData.php" class="form-inline" id="input">
+
+            <h2>Member Number:</h2>
+            <br>
+            <input type="text" class="form-control" name="number" placeholder="000000000">
+            <br><br>
+            <button type="submit" class="btn btn-default">Submit</button>
+            <br>
+        </form>
 
 
-<form action="/memberData.php">
-  Member Number:<br>
-  <input type="text" name="number" placeholder="000000000">
-  <br>
-</form>
+        <div class="line"></div>
 
-<div id="Suggestions">
-<p>Suggestions</p>
 
-</div>
+        <form action="/memberData.php" class="form-inline" id="input">
 
-<h2>Life Events</h2>
-<div id="icons">
-<div class="square">Moving</div>
-<div class="square">Marriage</div>
-<div class="square">Retirement</div>
-<div class="square">Death</div>
-<div class="square">Divorce</div>
-<div class="square">Child</div>
-<div class="square">Deployment</div>
-<div class="square">Small Business</div>
+            <h2>Chat Box</h2>
+            <br>
+            <input type="text" class="form-control" name="number" placeholder="Ask me a question">
+            <br><br>
+            <button type="submit" class="btn btn-default">Submit</button>
+            <br>
+        </form>
+    </div>
 
-</div>
 
+    <br><br>
+    <div class="suggestions">
+    <h2 >Suggested Results</h2>
+    <div id="icons2">
+        <div class="well">
+            <p>Storage</p>
+            <img id="image" src="pod.png">
+            <figcaption>Get rewarded when you buy or sell your home</figcaption>
+        </div>
+        <div class="well">
+            <p>Flood Insurance</p>
+            <img id="image" src="flood.jpg">
+            <figcaption>Intense rainy seasons indicated in your area</figcaption>
+        </div>
+        <div class="well">
+            <p>Life Insurance</p>
+            <img id="image" src="life.jpg">
+            <figcaption>Insure your family's protection</figcaption>
+        </div>
+        </div>
+        <img src="star.png">
+        </div>
+    <br>
+
+    <h2 class="clear">Life Events</h2>
+    <div id="icons">
+        <a href="move.html"><div class="well">
+            <p>Moving</p>
+            <img id="image" src="moving-truck.png">
+            </div></a>
+        <div class="well">
+            <p>Marriage</p>
+            <img id="image" src="marriage.png">
+        </div>
+        <div class="well">
+            <p>Retirement</p>
+            <img id="image" src="retirement.png">
+        </div>
+        <div class="well">
+            <p>Death</p>
+            <img id="image" src="death.png">
+        </div>
+        <div class="well">
+            <p>Divorce</p>
+            <img id="image" src="divorce.png">
+        </div>
+        <div class="well">
+            <p>Baby</p>
+            <img id="image" src="child.png">
+        </div>
+        <div class="well">
+            <p>Deployment</p>
+            <img id="image" src="deployment.png">
+        </div>
+        <a href="http://google.com">
+            <div class="well">
+                <p>Small Business</p>
+                <img id="image" src="smallbusiness.png">
+            </div>
+        </a>
+
+    </div>
 
 </body>
 </html>
