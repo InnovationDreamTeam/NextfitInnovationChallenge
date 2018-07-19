@@ -13,4 +13,6 @@ module.exports = function(app) {
   app.route('/mockFloodInsuranceInformation').get(mockServiceController.getFloodInsurance);
 
   app.route('/mockLifeInsuranceInformation').get(mockServiceController.getLifeInsurance);
+
+  app.route('/memberSuggestedProducts/:memberID').get(mockServiceController.getMemberSuggestedProducts);
 };

@@ -1,4 +1,5 @@
 'use strict';
+const rp = require('request-promise');
 
 exports.getMemberMoverProbability = function(req, res) {
     var memberID = req.params.memberID;
@@ -25,10 +26,10 @@ exports.getMemberResidencyInformation = function(req, res) {
     var stateOfResidency;
     if(memberID == 10) {
         ownsHome = true;
-        stateOfResidency = "Arizona";
+        stateOfResidency = "AZ";
     } else if(memberID == 20) {
         ownsHome = true;
-        stateOfResidency = "Florida";
+        stateOfResidency = "FL";
     } else {
         res.status(404).send();
         return;
@@ -93,7 +94,7 @@ exports.getFloodInsurance = function(req, res) {
         };
 
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).send(JSON.stringify(product));
+    res.status(200).send(JSON.stringify([product]));
     return;
 };
 
@@ -106,6 +107,166 @@ exports.getLifeInsurance = function(req, res) {
         };
 
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).send(JSON.stringify(product));
+    res.status(200).send(JSON.stringify([product]));
     return;
+};
+
+exports.getMemberSuggestedProducts = function(req, res) {
+
+    var memberID = req.params.memberID;
+
+    var options = {
+        uri: 'https://www.fema.gov/api/open/v1/DisasterDeclarationsSummaries',
+        json: true // Automatically parses the JSON string in the response
+    };
+     
+    var femaDisasterInformationPromise = rp(options).then(function (data) {
+        return data;
+    }).catch(function (err) {
+        // API call failed...
+    });
+
+    var options2 = {
+        uri: 'http://localhost:3000/mockMemberResidencyInformation/' + memberID,
+        json: true // Automatically parses the JSON string in the response
+    };
+     
+    var memberResidencyInformationPromise = rp(options2).then(function (data) {
+        return data;
+    }).catch(function (err) {
+        // API call failed...
+    });
+
+    var stateFloodCountPromise = Promise.all([femaDisasterInformationPromise, memberResidencyInformationPromise]).then((data) => {
+        var memberResidencyInformation = data[1];
+        var memberOwnsHome = memberResidencyInformation.ownsHome;
+        var memberResidencyState = memberResidencyInformation.stateOfResidency;
+
+        var femaDisasterInformation = data[0];
+        var femaDisasters = femaDisasterInformation.DisasterDeclarationsSummaries;
+
+        var floodCount = 0;
+        femaDisasters.forEach(function(disaster) {
+
+            if(disaster.state == memberResidencyState && (disaster.incidentType == "Flood" || disaster.incidentType == "Hurricane")) {
+                floodCount++;
+            }
+        });
+
+        return floodCount;
+    });
+
+    var suggestedProducts = [];
+    var floodSuggestedProductsPromise = stateFloodCountPromise.then(floodCount => {
+        if(floodCount > 10) {
+            var options3 = {
+                uri: 'http://localhost:3000/mockFloodInsuranceInformation',
+                json: true // Automatically parses the JSON string in the response
+            };
+             
+            return rp(options3).then(function (data) {
+                console.log("FLOOD SUGGESTED");
+                return data;
+            }).catch(function (err) {
+                // API call failed...
+            });
+        }
+    });
+
+
+
+
+    var options4 = {
+        uri: 'http://localhost:3000/mockMemberMoverModelService/' + memberID,
+        json: true // Automatically parses the JSON string in the response
+    };
+     
+    var memberMovingProbabilityPromise = rp(options4).then(function (data) {
+        return data;
+    }).catch(function (err) {
+        // API call failed...
+    });
+
+    var movingSuggestedProductsPromise = memberMovingProbabilityPromise.then(data => {
+        var moveProbability = data.probability;
+
+        if(moveProbability >= 0.75) {
+            var options5 = {
+                uri: 'http://localhost:3000/mockMovingServicesInformation',
+                json: true // Automatically parses the JSON string in the response
+            };
+             
+            return rp(options5).then(function (data) {
+                console.log("MOVING SUGGESTED");
+                return data;
+            }).catch(function (err) {
+                // API call failed...
+            });
+        }
+    });
+
+
+
+
+    var options5 = {
+        uri: 'http://localhost:3000/mockMemberLifeInsuranceInformation/' + memberID,
+        json: true // Automatically parses the JSON string in the response
+    };
+     
+    var memberLifeInsuranceInformationPromise = rp(options5).then(function (data) {
+        return data;
+    }).catch(function (err) {
+        // API call failed...
+    });
+
+    var lifeInsuranceSuggestedProductsPromise = memberLifeInsuranceInformationPromise.then(data => {
+        var hasLifeInsurance = data.hasLifeInsurance;
+
+        if(!hasLifeInsurance) {
+            var options6 = {
+                uri: 'http://localhost:3000/mockLifeInsuranceInformation',
+                json: true // Automatically parses the JSON string in the response
+            };
+             
+            return rp(options6).then(function (data) {
+                console.log("LIFE INSURANCE SUGGESTED");
+                return data;
+            }).catch(function (err) {
+                // API call failed...
+            });
+        }
+    });
+
+    Promise.all([movingSuggestedProductsPromise,floodSuggestedProductsPromise,lifeInsuranceSuggestedProductsPromise]).then(data => {
+
+        var movingSuggestedProducts = data[0];
+        var floodSuggestedProducts = data[1];
+        var lifeInsuranceSuggestedProducts = data[2];
+
+        if(movingSuggestedProducts) {
+            movingSuggestedProducts.forEach(function(product) {
+                suggestedProducts.push(product);
+            });
+        }
+        
+        if(floodSuggestedProducts) {
+            floodSuggestedProducts.forEach(function(product) {
+                suggestedProducts.push(product);
+            });
+        }
+
+        if(lifeInsuranceSuggestedProducts) {
+            lifeInsuranceSuggestedProducts.forEach(function(product) {
+                suggestedProducts.push(product);
+            });
+        }
+
+        console.log(suggestedProducts);
+
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).send(JSON.stringify(suggestedProducts));
+        return;
+
+        
+    });
 };
