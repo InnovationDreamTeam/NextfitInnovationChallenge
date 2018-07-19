@@ -5,6 +5,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="ApiAi.min.js"></script>
+    <script src="scripts.js"></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif:700" rel="stylesheet">
     <title>Customer Discounts</title>
@@ -19,13 +22,13 @@
     <h1>Member Suggestions</h1>
     <br><br><br>
     <div id="boxes">
-        <form action="/memberData.php" class="form-inline" id="input">
+        <form class="form-inline input">
 
             <h2>Member Number:</h2>
             <br>
-            <input type="text" class="form-control" name="number" placeholder="000000000">
+            <input id="memberNumber" type="text" class="form-control" name="number" placeholder="000000000">
             <br><br>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button id="submitMemberNumber" type="button" class="btn btn-default">Submit</button>
             <br>
         </form>
 
@@ -33,13 +36,17 @@
         <div class="line"></div>
 
 
-        <form action="/memberData.php" class="form-inline" id="input">
+        <form class="form-inline input">
 
             <h2>Chat Box</h2>
             <br>
-            <input type="text" class="form-control" name="number" placeholder="Ask me a question">
-            <br><br>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button id="startChatSurvey" type="button" class="btn btn-default">Start Chat</button>
+            <div id="chatbotBox">
+                <p id="chatbotQuestion"></p>
+                <input id="chatbotInputText" type="text" class="form-control">
+                <br><br>
+                <button id="submitChatbotInputText" type="button" class="btn btn-default">Submit</button>
+            </div>
             <br>
         </form>
     </div>
@@ -49,6 +56,7 @@
     <div class="suggestions">
     <h2 >Suggested Results</h2>
     <div id="icons2">
+        <!--
         <div class="well">
             <p>Storage</p>
             <img id="image" src="pod.png">
@@ -64,6 +72,7 @@
             <img id="image" src="life.jpg">
             <figcaption>Insure your family's protection</figcaption>
         </div>
+        -->
         </div>
         <img src="star.png">
         </div>
@@ -71,7 +80,7 @@
 
     <h2 class="clear">Life Events</h2>
     <div id="icons">
-        <a href="move.html"><div class="well">
+        <a href="move.html"><div id="movingCategory" class="well">
             <p>Moving</p>
             <img id="image" src="moving-truck.png">
             </div></a>
@@ -91,7 +100,7 @@
             <p>Divorce</p>
             <img id="image" src="divorce.png">
         </div>
-        <div class="well">
+        <div id="babyCategory" class="well">
             <p>Baby</p>
             <img id="image" src="child.png">
         </div>

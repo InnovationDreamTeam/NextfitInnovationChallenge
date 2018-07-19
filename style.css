@@ -36,9 +36,18 @@ h1 {
     border-left: 6px solid firebrick;
 }
 
-#input {
+#chatbotBox {
+    display: none;
+}
+
+#boxes form {
+    min-width: 400px;
+}
+
+.input {
     border-radius: 15px;
-    background-color: lightgray;
+    background-color: #eaeaea;
+    border: 1px solid #e3e3e3;
     padding: 30px;
     margin: 50px;
     box-shadow: 0px 5px 8px gray;
@@ -49,9 +58,12 @@ h1 {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    text-transform: uppercase;
     padding: 20px;
     box-shadow: 0px 5px 8px gray;
+}
+
+.suggestions p {
+    text-transform: uppercase;
 }
 
 .suggestions h2{
@@ -99,12 +111,13 @@ h1 {
     display: flex;
     float: left;
     width: 330px;
-    height: 220px;
+    height: 240px;
     padding: 20px;
     padding-left: 30px;
     padding-right: 30px;
     margin: 30px;
     display: block;
+    color: #333;
 }
 
 #icons2 .well img {

@@ -69,6 +69,7 @@ exports.getMovingServices = function(req, res) {
         memberBenefits: ["3 months free monitoring every 24 months upon deployment", 
                             "Move credit up to $349", 
                             "Money back service guarentee if not satisfied within 6 months"],
+        category: "Moving",
         link: "https://www.usaa.com/adt"
         },
         { serviceName: "PODS Moving & Storage",
@@ -76,6 +77,7 @@ exports.getMovingServices = function(req, res) {
         memberBenefits: ["10% off the first months storage", 
                            "10% off initial and long distance transportation", 
                            "Performace monitoring"],
+        category: "Moving",
         link: "https://www.usaa.com/pods"
        }
     ];
@@ -88,9 +90,10 @@ exports.getMovingServices = function(req, res) {
 exports.getFloodInsurance = function(req, res) {
 
     var product = { serviceName: "Flood Insurance",
-        description: "[Flood insurance description placeholder]",
-        memberBenefits: ["[Flood insurance benefit #1 placeholder]", "[Flood insurance benefit #2 placeholder]"],
-        link: "https://home.usaa.com/sites/connect/ASC/Pages/Product.aspx?page=Flood%2520Program"
+        description: "Intense rainy seasons indicated in your area.",
+        memberBenefits: [""],
+        category: "Moving",
+        link: "https://www.usaa.com/inet/wc/insurance_home_flood?SearchRanking=1&SearchLinkPhrase=flood%20insurance"
         };
 
     res.setHeader('Content-Type', 'application/json');
@@ -101,8 +104,9 @@ exports.getFloodInsurance = function(req, res) {
 exports.getLifeInsurance = function(req, res) {
 
     var product = { serviceName: "Life Insurance",
-        description: "Think of life insurance as your promise to help protect your loved ones, no matter what. Whether the money is used to replace your income, pay off a debt, pay for education or cover burial expenses, life insurance can give your family a financial safety net when they need it most",
+        description: "Think of life insurance as your promise to help protect your loved ones, no matter what.",
         memberBenefits: [],
+        category: "",
         link: "https://www.usaa.com/inet/pages/insurance_life_main"
         };
 
