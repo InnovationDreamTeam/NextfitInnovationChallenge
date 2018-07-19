@@ -69,7 +69,7 @@ exports.getMovingServices = function(req, res) {
         memberBenefits: ["3 months free monitoring every 24 months upon deployment", 
                             "Move credit up to $349", 
                             "Money back service guarentee if not satisfied within 6 months"],
-        link: "https://www.usaa.com/pods"
+        link: "https://www.usaa.com/adt"
         },
         { serviceName: "PODS Moving & Storage",
         description: "Reduce your moving and storage hassels when you move, deploy, or PCS",
