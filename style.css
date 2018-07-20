@@ -125,3 +125,36 @@ h1 {
     height: 100px;
     margin-bottom: 10px;
 }
+
+/* Move Page Styling */
+
+#discounts{
+    justify-content: left;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+    width:1450px;
+margin: auto;
+}
+
+#discounts img{
+   margin:10px;
+    margin-left:70px;
+border: 3px solid black;
+    box-shadow: 0px 5px 8px gray;
+
+}
+
+#discounts div{
+    width: 375px;
+background-color: lightgray;
+    border: 3px solid black;
+    box-shadow: 0px 5px 8px gray;
+    border-radius: 15px;
+    margin: 10px;
+    padding-left: 20px;
+
+}
+#discounts h2{
+font-weight: bold;
+}
